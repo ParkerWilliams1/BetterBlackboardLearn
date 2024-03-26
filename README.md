@@ -4,6 +4,10 @@
 
 An Updated Look and Feel to Blackboard Learn Ultra. Providing Full User Customization, including Dark Mode, Course Customization, &  More!
 
+### Supported on
+
+![Google Chrome](https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white)
+
 ## Inquiries
 
 To contact me, please email parkerwilliams1500@gmail.com, or you can open an issue within the "Issues" tab on GitHub.
