@@ -34,6 +34,28 @@ To install, run, and build with this repository,
 - Click the "Load upacked" button in the header.
 - When prompted to open a file, select the root directory of this repository.
 
-## License
+## File Structure
+
+```
+.
+├── README.md
+├── content
+│ ├── content.js
+├── icons
+│ ├── BbOrangeGradient128.png
+│ ├── BbOrangeGradient16.png
+│ ├── BbOrangeGradient48.png
+├── options
+│ ├── background.js
+│ ├── options.html
+│ └── options.css
+├── popup
+│ ├── popup.html
+│ ├── popup.css
+│ └── popup.js
+└── manifest.json
+```
+
+## Branding
 
 ![Better Blackboard Learn](/icons/BbOrangeGradient48.png)
