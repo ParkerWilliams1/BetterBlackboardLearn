@@ -43,8 +43,8 @@ To install, run, and build with this repository,
 │ ├── content.js
 ├── icons
 │ ├── BbOrangeGradient128.png
-│ ├── BbOrangeGradient16.png
 │ ├── BbOrangeGradient48.png
+│ ├── BbOrangeGradient16.png
 ├── options
 │ ├── background.js
 │ ├── options.html
