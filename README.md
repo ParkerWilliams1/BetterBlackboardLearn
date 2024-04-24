@@ -2,7 +2,7 @@
 
 # Better Blackboard Learn
 
-An Updated Look and Feel to Blackboard Learn Ultra. Providing Full User Customization, including Dark Mode, Course Customization, &  More!
+An Updated Look and Feel to Blackboard Learn. Providing Full User Customization, including Dark Mode, Course Customization, &  More!
 
 ### Supported on
 
