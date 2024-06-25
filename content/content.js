@@ -233,6 +233,7 @@ function customThemes() {
                 element.parentNode.removeChild(element);
             });
         }
+        // TODO: Update Sidebar CSS
         if (options.customsidebar != "default") {
             let sidebarColor = options.customsidebar;
             let customthemecss = `aside#side-menu, span.branding.themed-logo-background-primary-fill {background: ${sidebarColor} !important;} .base #side-menu .off-canvas-list .base-navigation-button .base-navigation-button-content:hover,  .color-selection-live-mode .active .base-navigation-button-content.themed-background-primary-alt-fill-only, .color-selection-live-mode .themed-background-primary-alt-fill-only:hover, .color-selection-live-mode .themed-background-primary-alt-fill-only:hover, .color-selection-live-mode .base-navigation-button.active .base-navigation-button-content.themed-background-primary-alt-fill-only, .color-selection-live-mode .base-navigation-button:focus .base-navigation-button-content.themed-background-primary-alt-fill-only, .color-selection-live-mode .base-navigation-button:focus-visible .base-navigation-button-content.themed-background-primary-alt-fill-only {background: ${sidebarColor} !important; filter: brightness(150%) !important;} .color-selection-live-mode .active .base-navigation-button-content.themed-background-primary-alt-fill-only {color: #1f1f1f !important;}`;
