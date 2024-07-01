@@ -342,5 +342,3 @@ function removeThemes() {
             element.parentNode.removeChild(element);
         });
 }
-
-
