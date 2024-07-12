@@ -27,7 +27,8 @@
     {
       "matches": [
         "https://*.blackboard.com/*",
-        "https://*.learn.edu/*"
+        "https://*.learn.edu/*",
+        "https://blackboard.stockton.edu/"
       ],
       "js": ["content/content.js"],
       "run_at": "document_start"
