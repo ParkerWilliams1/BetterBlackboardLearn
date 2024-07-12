@@ -1,6 +1,6 @@
 {
   "name": "Better Blackboard Learn",
-  "description": "A feature-rich extension for Blackboard Learn.",
+  "description": "Dark mode, Custom Course Images & Names, Custom Themes, and More for Blackboard Learn.",
   "version": "1.0.4",
   "manifest_version": 3,
   "permissions": [
