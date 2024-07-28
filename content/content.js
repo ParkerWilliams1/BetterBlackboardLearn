@@ -1,7 +1,29 @@
 const domain = window.location.origin
 
+function isDomainBlackboardPage() {
+    return fetch(domain + `/learn/api/v1/users/me`)
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return res.json();
+        })
+        .then(data => {
+            if (data && data.userName) {
+                console.log("Yes this is a Blackboard URL");
+                startExtension();
+            } else {
+                console.log("No, this is not a Blackboard URL");
+            }
+        })
+        .catch(error => {
+            console.log("No, this is not a Blackboard URL", error);
+        });
+}
+
+
 document.addEventListener('DOMContentLoaded', function() {
-    startExtension();
+    isDomainBlackboardPage();
 });
 
 function startExtension() {
