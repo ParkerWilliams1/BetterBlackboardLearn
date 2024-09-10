@@ -107,17 +107,22 @@ function getCoursesId() {
         chrome.storage.sync.get(['userName'], result => {
             options = result;
             let userName = options.userName;
+
             fetch(domain + `/learn/api/public/v1/users/userName:${userName}/courses`)
             .then(res => res.json())
             .then(data => {
                 let courses = data.results;
-                let courseId = [];
+                let courseIdList = [];
+
                 for (let i = 0; i < courses.length; i++) {
-                    courseId[i] = courses[i].courseId;
+                    let validCourseId = selectCourseId(courses[i]);
+                    if (validCourseId) {
+                        courseIdList.push(validCourseId);
+                    }
                 }
-                chrome.storage.sync.set({'courselist' : courseId});
-                courses.courselist = options.courselist;
-                resolve(courseId);
+
+                chrome.storage.sync.set({'courselist' : courseIdList});
+                resolve(courseIdList);
             })
             .catch(error => {
                 reject(error);
@@ -363,4 +368,21 @@ function removeThemes() {
         themes.forEach(element => {
             element.parentNode.removeChild(element);
         });
+}
+
+// Function to select the valid course ID
+function selectCourseId(course) {
+    if (isValidCourseId(course.courseId)) {
+        return course.courseId;
+    } 
+    if (isValidCourseId(course.id)) {
+        return course.id;
+    }
+    return null;
+}
+
+// Function to validate the courseId format
+function isValidCourseId(id) {
+    const courseIdPattern = /^_\d+_1$/;
+    return courseIdPattern.test(id);
 }
