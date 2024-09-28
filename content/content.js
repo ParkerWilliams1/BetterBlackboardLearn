@@ -39,6 +39,12 @@ function startExtension() {
 .then(() => {
     return getShortenedNames();
 })
+.then(() => {
+    returnClassesPercentages();
+})
+.then(() => {
+    enterGrades();
+})
 
     chrome.storage.sync.get(null, result => {
         options = { ...options, ...result };
@@ -60,6 +66,7 @@ function applyOptionsChanges(changes) {
         switch (key) {
             case ("colorscheme"):
                 ToggleDarkMode();
+                enterGrades();
                 break;
             case ("coursebannerlink"):
                 loadCustomCourses();
@@ -107,22 +114,17 @@ function getCoursesId() {
         chrome.storage.sync.get(['userName'], result => {
             options = result;
             let userName = options.userName;
-
             fetch(domain + `/learn/api/public/v1/users/userName:${userName}/courses`)
             .then(res => res.json())
             .then(data => {
                 let courses = data.results;
-                let courseIdList = [];
-
+                let courseId = [];
                 for (let i = 0; i < courses.length; i++) {
-                    let validCourseId = selectCourseId(courses[i]);
-                    if (validCourseId) {
-                        courseIdList.push(validCourseId);
-                    }
+                    courseId[i] = courses[i].courseId;
                 }
-
-                chrome.storage.sync.set({'courselist' : courseIdList});
-                resolve(courseIdList);
+                chrome.storage.sync.set({'courselist' : courseId});
+                courses.courselist = options.courselist;
+                resolve(courseId);
             })
             .catch(error => {
                 reject(error);
@@ -370,19 +372,100 @@ function removeThemes() {
         });
 }
 
-// Function to select the valid course ID
-function selectCourseId(course) {
-    if (isValidCourseId(course.courseId)) {
-        return course.courseId;
-    } 
-    if (isValidCourseId(course.id)) {
-        return course.id;
-    }
-    return null;
+// **** Implementing Course Grades ****
+
+async function returnClassesPercentages() {
+    chrome.storage.sync.get(['userName', 'courselist'], async result => {
+        let options = result;
+        let userName = options.userName;
+        let courseId = options.courselist;
+
+        let courseGradesMap = new Map();
+
+        for (let i = 0; i < courseId.length; i++) {
+            try {
+                let grades = await getCoursesGrade(courseId[i], userName);
+
+                let totalScored = 0;
+                let totalPossible = 0;
+                for (let j = 0; j < grades.length; j++) {
+                    if (grades[j].displayGrade) {
+                        if (grades[j].displayGrade.score) {
+                            totalScored += grades[j].displayGrade.score;
+                        }
+                        if (grades[j].displayGrade.possible) {
+                            totalPossible += grades[j].displayGrade.possible;
+                        }
+                    }
+                }
+
+                let totalGrade = Math.round((totalScored / totalPossible) * 100);
+                console.log(`${courseId[i]} => Grade: ${totalGrade}%`);
+                courseGradesMap.set(courseId[i], totalGrade);
+
+                
+            } catch (error) {
+                console.error(`Error fetching grades for course ${courseId[i]}:`, error);
+            }
+        }
+
+        console.log("here is the final map");
+        console.log([...courseGradesMap]);
+        chrome.storage.sync.set({ 'courseGradesMap': [...courseGradesMap] });
+    });
 }
 
-// Function to validate the courseId format
-function isValidCourseId(id) {
-    const courseIdPattern = /^_\d+_1$/;
-    return courseIdPattern.test(id);
+function getCoursesGrade(course_id, user_id) {
+    return new Promise((resolve, reject) => {
+        fetch(`${domain}/learn/api/public/v2/courses/${course_id}/gradebook/users/userName:${user_id}`)
+            .then(res => res.json())
+            .then(data => {
+                resolve(data.results);
+            })
+            .catch(error => {
+                reject(error);
+            });
+        });
+}
+
+function enterGrades() {
+    chrome.storage.sync.get(['courseGradesMap'], result => {
+        let courseGradesMap = result.courseGradesMap;
+
+        if (!courseGradesMap || typeof courseGradesMap !== 'object') {
+            console.error('No course grades map found or invalid format.');
+            return;
+        }
+
+        for (let [courseId, grade] of courseGradesMap) {
+            let courseElement = document.querySelector(`.element-card[data-course-id="${courseId}"]`);
+
+            if (courseElement) {
+                let courseGradeElement = document.createElement('div');
+                courseGradeElement.className = 'courseGrade';
+
+                courseGradeElement.style.width = '60px';
+                courseGradeElement.style.height = '60px';
+                courseGradeElement.style.backgroundColor = '#1f1f1f';
+                courseGradeElement.style.borderRadius = '50%';
+                courseGradeElement.style.position = 'absolute';
+                courseGradeElement.style.top = '0px';
+                courseGradeElement.style.left = '0px';
+
+                let pTag = document.createElement('p');
+                pTag.innerText = grade;
+                pTag.style.color = 'white';
+                pTag.style.position = 'absolute'; 
+                pTag.style.top = '15px';
+                pTag.style.left = '15px';
+                pTag.style.zIndex = '10';
+                
+                
+                courseGradeElement.appendChild(pTag);
+                courseElement.appendChild(courseGradeElement);
+            } else {
+                console.error(`Course element not found for courseId: ${courseId}`);
+            }
+        }
+    });
 }
