@@ -2,6 +2,13 @@
 
 # Better Blackboard Learn
 
+<p align="center">
+  <a href="https://www.codefactor.io/repository/github/parkerwilliams1/BetterBlackboardLearn">
+    <img src="https://www.codefactor.io/repository/github/parkerwilliams1/BetterBlackboardLearn/badge" alt="CodeFactor"></a>
+  <img src="https://img.shields.io/chrome-web-store/rating/ngmpmjpigceaccddpkoeejmakahopopa.svg?color=00b16a" alt="Rating">
+  <img src="https://img.shields.io/chrome-web-store/users/ngmpmjpigceaccddpkoeejmakahopopa.svg?color=07f" alt="User Count">
+</p>
+
 An Updated Look and Feel to Blackboard Learn. Providing Full User Customization, including Dark Mode, Course Customization, &  More!
 
 ### Supported on
