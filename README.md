@@ -2,7 +2,7 @@
 
 # Better Blackboard Learn
 
-<p align="center">
+<p>
   <a href="https://www.codefactor.io/repository/github/parkerwilliams1/BetterBlackboardLearn">
     <img src="https://www.codefactor.io/repository/github/parkerwilliams1/BetterBlackboardLearn/badge" alt="CodeFactor"></a>
   <img src="https://img.shields.io/chrome-web-store/rating/ngmpmjpigceaccddpkoeejmakahopopa.svg?color=00b16a" alt="Rating">
