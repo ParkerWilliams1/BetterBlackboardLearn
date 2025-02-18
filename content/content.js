@@ -107,22 +107,17 @@ function getCoursesId() {
         chrome.storage.sync.get(['userName'], result => {
             options = result;
             let userName = options.userName;
-
             fetch(domain + `/learn/api/public/v1/users/userName:${userName}/courses`)
             .then(res => res.json())
             .then(data => {
                 let courses = data.results;
-                let courseIdList = [];
-
+                let courseId = [];
                 for (let i = 0; i < courses.length; i++) {
-                    let validCourseId = selectCourseId(courses[i]);
-                    if (validCourseId) {
-                        courseIdList.push(validCourseId);
-                    }
+                    courseId[i] = courses[i].courseId;
                 }
-
-                chrome.storage.sync.set({'courselist' : courseIdList});
-                resolve(courseIdList);
+                chrome.storage.sync.set({'courselist' : courseId});
+                courses.courselist = options.courselist;
+                resolve(courseId);
             })
             .catch(error => {
                 reject(error);
@@ -262,7 +257,7 @@ function customThemes() {
         }
         if (options.customsidebar != "default") {
             let sidebarColor = options.customsidebar;
-            let customthemecss = `nav#side-menu, nav#side-menu .bb-inner-wrap, nav#side-menu header, nav#side-menu header .branding, nav#side-menu nav, nav#side-menu nav ul, nav#side-menu nav li, nav#side-menu nav li a {background-color: ${sidebarColor} !important;}`;
+            let customthemecss = `.base #side-menu .bb-inner-wrap>header .branding, .base .color-selection-preview-mode .bb-inner-wrap>header .branding {background-color: ${sidebarColor} !important;} .base #side-menu .off-canvas-list .base-navigation-button:first-child {background-color: ${sidebarColor} !important;} .base .side-menu-footer {background-color: ${sidebarColor} !important} .base #side-menu .off-canvas-list .base-navigation-button.active .theme-border-left-active, .base .color-selection-preview-mode .off-canvas-list .base-n    avigation-button.active .theme-border-left-active {background-color: ${sidebarColor} !important; filter: brightness(135%) !important;`;
             createSheet('customsidebar', customthemecss);
         } else {
             const sidebar = document.querySelectorAll('.customsidebar');
@@ -368,21 +363,4 @@ function removeThemes() {
         themes.forEach(element => {
             element.parentNode.removeChild(element);
         });
-}
-
-// Function to select the valid course ID
-function selectCourseId(course) {
-    if (isValidCourseId(course.courseId)) {
-        return course.courseId;
-    } 
-    if (isValidCourseId(course.id)) {
-        return course.id;
-    }
-    return null;
-}
-
-// Function to validate the courseId format
-function isValidCourseId(id) {
-    const courseIdPattern = /^_\d+_1$/;
-    return courseIdPattern.test(id);
 }
