@@ -2,6 +2,13 @@
 
 # Better Blackboard Learn
 
+<p>
+  <a href="https://www.codefactor.io/repository/github/parkerwilliams1/BetterBlackboardLearn">
+    <img src="https://www.codefactor.io/repository/github/parkerwilliams1/BetterBlackboardLearn/badge" alt="CodeFactor"></a>
+  <img src="https://img.shields.io/chrome-web-store/rating/ngmpmjpigceaccddpkoeejmakahopopa.svg?color=00b16a" alt="Rating">
+  <img src="https://img.shields.io/chrome-web-store/users/ngmpmjpigceaccddpkoeejmakahopopa.svg?color=07f" alt="User Count">
+</p>
+
 An Updated Look and Feel to Blackboard Learn. Providing Full User Customization, including Dark Mode, Course Customization, &  More!
 
 ### Supported on
@@ -38,22 +45,22 @@ To install, run, and build with this repository,
 
 ```
 .
-â”œâ”€â”€ README.md
-â”œâ”€â”€ content
-â”‚ â”œâ”€â”€ content.js
-â”œâ”€â”€ icons
-â”‚ â”œâ”€â”€ BbOrangeGradient128.png
-â”‚ â”œâ”€â”€ BbOrangeGradient48.png
-â”‚ â”œâ”€â”€ BbOrangeGradient16.png
-â”œâ”€â”€ options
-â”‚ â”œâ”€â”€ background.js
-â”‚ â”œâ”€â”€ options.html
-â”‚ â””â”€â”€ options.css
-â”œâ”€â”€ popup
-â”‚ â”œâ”€â”€ popup.html
-â”‚ â”œâ”€â”€ popup.css
-â”‚ â””â”€â”€ popup.js
-â””â”€â”€ manifest.json
+¿¿¿ README.md
+¿¿¿ content
+¿ ¿¿¿ content.js
+¿¿¿ icons
+¿ ¿¿¿ BbOrangeGradient128.png
+¿ ¿¿¿ BbOrangeGradient48.png
+¿ ¿¿¿ BbOrangeGradient16.png
+¿¿¿ options
+¿ ¿¿¿ background.js
+¿ ¿¿¿ options.html
+¿ ¿¿¿ options.css
+¿¿¿ popup
+¿ ¿¿¿ popup.html
+¿ ¿¿¿ popup.css
+¿ ¿¿¿ popup.js
+¿¿¿ manifest.json
 ```
 
 ## Branding
