@@ -23,7 +23,7 @@ function isDomainBlackboardPage() {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    isDomainBlackboardPage();
+    isDomainBlackboardPage(); 
 });
 
 function startExtension() {
@@ -41,9 +41,6 @@ function startExtension() {
 })
 .then(() => {
     returnClassesPercentages();
-})
-.then(() => {
-    enterGrades();
 })
 
     chrome.storage.sync.get(null, result => {
@@ -66,7 +63,6 @@ function applyOptionsChanges(changes) {
         switch (key) {
             case ("colorscheme"):
                 ToggleDarkMode();
-                enterGrades();
                 break;
             case ("coursebannerlink"):
                 loadCustomCourses();
@@ -374,6 +370,11 @@ function removeThemes() {
 
 // **** Implementing Course Grades ****
 
+function createGradeElement(courseid, grade_val) {
+    let css = ``;
+    createSheet('Grades', css);
+}
+
 async function returnClassesPercentages() {
     chrome.storage.sync.get(['userName', 'courselist'], async result => {
         let options = result;
@@ -400,7 +401,6 @@ async function returnClassesPercentages() {
                 }
 
                 let totalGrade = Math.round((totalScored / totalPossible) * 100);
-                console.log(`${courseId[i]} => Grade: ${totalGrade}%`);
                 courseGradesMap.set(courseId[i], totalGrade);
 
                 
@@ -409,7 +409,6 @@ async function returnClassesPercentages() {
             }
         }
 
-        console.log("here is the final map");
         console.log([...courseGradesMap]);
         chrome.storage.sync.set({ 'courseGradesMap': [...courseGradesMap] });
     });
@@ -469,3 +468,11 @@ function enterGrades() {
         }
     });
 }
+
+
+let algobox = document.querySelectorAll(`article#course-list-course-_140238_1:hover`);
+
+algobox.addEventListener('mouseover', function(event) {
+	console.log('hovered over the course');
+})
+
