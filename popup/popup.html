@@ -80,37 +80,42 @@
         </div>
       
         <div id="preset-theme-options">
-          <h2 id="preset-themes-header">Themes</h2>
-          <button class="theme-buttons" id="luna-button">Luna</button>
-          <button class="theme-buttons" id="nightfall-button">Nightfall</button>
-          <button class="theme-buttons" id="midnight-button">Midnight</button>
-          <button class="theme-buttons" id="cyberspace-button">Cyber</button>
-          <button class="theme-buttons" id="joker-button">Joker</button>
-          <button class="theme-buttons" id="horizon-button">Horizon</button>
-          <button class="theme-buttons" id="melon-button">Melon</button>
-          <button class="theme-buttons" id="botanical-button">Botanical</button>
-          <button id="remove-preset-theme-button">Remove<br>Theme</button>
-          <button id="save-preset-theme-button">Save<br>Theme</button>
+          <h2 id="preset-themes-header">Preset Themes</h2>
+          <div id="preset-theme-buttons"></div>
+          <div id="preset-theme-action-buttons">
+            <button id="remove-preset-theme-button">Remove<br>Theme</button>
+            <button id="save-preset-theme-button">Save<br>Theme</button>
+          </div>
         </div>
-        
+
+
         <div id="card-options">
-          <div>
+          <h3 id="custom-course-header">Custom Courses</h3>
+          <div class="course-selection">
+            <h2>Select Course</h2>
             <select id="card-options-select">
               <option>Select Course</option>
             </select>
           </div>
-          <div class="card-info">
-            <h3 id="custom-course-header">Custom Courses</h3>
-            <h3 id="custom-banner-header">Custom Image</h3>
+
+          <div class="course-selection">
+            <h2>Custom Image</h2>
             <input id="card-options-link" type="text" placeholder="Copy Image Address">
-            <p id="custom-image-text">Enter "default" to reset custom images</p>
-            <h3 id="custom-name-header">Custom Name</h3>
+            <p class="course-help">Enter "default" to reset custom images</p>
+          </div>
+
+          <div class="course-selection">
+            <h2>Custom Name</h2>
             <input id="card-options-name" type="text" placeholder="Enter Custom Name">
-            <p id="custom-name-text">Enter "default" to reset custom names</p>
-            <button id="save-banner-options">Save<br>Courses</button>
+            <p class="course-help">Enter "default" to reset custom names</p>
+          </div>
+
+          <div class="course-actions">
             <button id="reset-banner-options">Reset<br>Courses</button>
+            <button id="save-banner-options">Save<br>Courses</button>
           </div>
         </div>
+
 
         <div id="font-options">
           <h3 id="custom-fonts-header">Custom Fonts</h3>
@@ -134,8 +139,8 @@
           <div id="custom-font-input-container">
             <input id="user-custom-font" placeholder="Enter Custom Google Font">
             <div id="custom-font-action-buttons">
-              <button id="remove-font">Remove</button>
-              <button id="save-font-options">Save</button>
+              <button id="remove-font">Remove<br>Font</button>
+              <button id="save-font-options">Save<br>Font</button>
             </div>
           </div>
         </div>

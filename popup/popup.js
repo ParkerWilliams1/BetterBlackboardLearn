@@ -37,7 +37,7 @@ document.getElementById("report-issue-button").onclick = function() {
 document.getElementById("custom-cards-button").onclick = function() {
   title.style.display = 'none';
   mainoptions.style.display = 'none';
-  cardoptions.style.display = 'block';
+  cardoptions.style.display = 'flex';
 
 // Function to fill courses dropdown button
 function insertCoursesDropdown(courseshortnames, courseIdMap) {
@@ -161,30 +161,38 @@ document.getElementById('dark-theme-button').onclick = function() {
 
 
 /* Preset Custom Themes */
-document.getElementById('luna-button').onclick = function() {
-  chrome.storage.sync.set({'theme' : 'luna'});
-}
-document.getElementById('nightfall-button').onclick = function() {
-  chrome.storage.sync.set({'theme' : 'nightfall'});
-}
-document.getElementById('midnight-button').onclick = function() {
-  chrome.storage.sync.set({'theme' : 'midnight'});
-}
-document.getElementById('cyberspace-button').onclick = function() {
-  chrome.storage.sync.set({'theme' : 'cyberspace'});
-}
-document.getElementById('joker-button').onclick = function() {
-  chrome.storage.sync.set({'theme' : 'joker'});
-}
-document.getElementById('horizon-button').onclick = function() {
-  chrome.storage.sync.set({'theme' : 'horizon'});
-}
-document.getElementById('melon-button').onclick = function() {
-  chrome.storage.sync.set({'theme' : 'melon'});
-}
-document.getElementById('botanical-button').onclick = function() {
-  chrome.storage.sync.set({'theme' : 'botanical'});
-}
+const presetThemes = [
+  { name: "Luna", primary: "#5a3a7e", accent: "#f67599" },
+  { name: "Nightfall", primary: "#232323", accent: "#d82934" },
+  { name: "Midnight", primary: "#030f28", accent: "orange" },
+  { name: "Cyber", primary: "#030f28", accent: "#00ce7c" },
+  { name: "Joker", primary: "#321a47", accent: "#99de1e" },
+  { name: "Horizon", primary: "#1f1f1f", accent: "#f2c17b" },
+  { name: "Melon", primary: "#1f4437", accent: "#d6686f" },
+  { name: "Botanical", primary: "#7b9c98", accent: "#101e1c" },
+  { name: "Flare", primary: "#cd4412", accent: "#ffd93c" },
+  { name: "Ocean", primary: "#012e40", accent: "#00b4d8" },
+  { name: "Aurora", primary: "#0d1b2a", accent: "#00ff94" },
+  { name: "Candy", primary: "#ff79c6", accent: "#fff5b7" },
+  { name: "Storm", primary: "#2e2f3e", accent: "#9d00ff" },
+  { name: "Forest", primary: "#1b3b1b", accent: "#7bc950" },
+  { name: "Retro Neon", primary: "#3a2e49", accent: "#ff00ff" }
+];
+
+const themeContainer = document.getElementById("preset-theme-buttons");
+presetThemes.forEach(theme => {
+  const btn = document.createElement("button");
+  btn.textContent = theme.name;
+  btn.style.background = theme.primary;
+  btn.style.color = theme.accent;
+  btn.classList.add("theme-buttons");
+
+  btn.addEventListener("click", () => {
+    chrome.storage.sync.set({ theme: { primary: theme.primary, accent: theme.accent } });
+  });
+
+  themeContainer.appendChild(btn);
+});
 document.getElementById('remove-preset-theme-button').onclick = function() {
   chrome.storage.sync.set({'theme' : 'default'});
   title.style.display = 'block';

@@ -203,24 +203,9 @@ function presetThemes() {
             return;
         }
 
-        const themeColors = themePresets[selectedTheme];
-
-        if (themeColors) {
-            const [primary, accent] = themeColors;
-            createTheme(primary, accent);
-        }
+        const { primary, accent } = selectedTheme;
+        createTheme(primary, accent);
     });
-}
-
-const themePresets = {
-    'luna': ['#5a3a7e', '#f67599'],
-    'nightfall': ['#232323', '#d82934'],
-    'midnight': ['#030f28', 'orange'],
-    'cyberspace': ['#181c18', '#00ce7c'],
-    'joker': ['#321a47', '#99de1e'],
-    'horizon': ['#1f1f1f', '#f2c17b'],
-    'melon': ['#1f4437', '#d6686f'],
-    'botanical': ['#7b9c98', '#101e1c']
 }
 
 // Function for applying user selected Custom Themes

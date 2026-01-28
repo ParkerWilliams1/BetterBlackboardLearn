@@ -1,40 +1,60 @@
 /* Main Background and Container */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-body {height: 370px; width: 250px; font-family: 'Open Sans', sans-serif; background-color: #1f1f1f;}  
-#gradient {height: 500px; width: calc(100% + 30px);margin-left: -15px;position: absolute;z-index: -1;opacity: .6;top: -230px;background: radial-gradient(at 50% 0%, hsla(283, 99%, 27%, 0.8) 0px, transparent 60%), radial-gradient(at 90% 0%, hsla(290, 84%, 22%, 0.8) 0px, transparent 60%), radial-gradient(at 10% 0%, hsla(286, 83%, 21%, 0.8) 0px, transparent 60%),linear-gradient(to bottom, hsla(30, 100%, 50%, 0.5), transparent);}
+body {
+  height: 370px;
+  width: 250px; 
+  font-family: 'Open Sans', sans-serif; 
+  background-color: #1f1f1f;
+}
+
+#gradient {
+  height: 500px; 
+  width: calc(100% + 30px);
+  margin-left: -15px;
+  position: absolute;
+  z-index: -1;
+  opacity: .6;
+  top: -230px;
+  background: 
+    radial-gradient(at 50% 0%, hsla(283, 99%, 27%, 0.8) 0px, transparent 60%), 
+    radial-gradient(at 90% 0%, hsla(290, 84%, 22%, 0.8) 0px, transparent 60%), 
+    radial-gradient(at 10% 0%, hsla(286, 92%, 40%, 0.994) 0px, transparent 60%), 
+    linear-gradient(to bottom, hsla(30, 100%, 50%, 0.723), transparent);
+  }
 
 #header {
-    display: block;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0px 4px;
-    width: 100%;
-    box-sizing: border-box;
-    overflow: hidden;
+  display: block;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 4px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 #title {
-    color: white;
-    right: 4px;
-    font-size: 23px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+  color: white;
+  right: 4px;
+  font-size: 23px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .BB-logo {
   position: absolute;
   right: 8px;
   top: 20px;
-    width: 32px;
-    height: auto;
-    flex-shrink: 0;
+  width: 32px;
+  height: auto;
+  flex-shrink: 0;
 }
 
 /* Standard Tag Style */
 button {background-color: #474646; color: white; padding: 8px 16px; border: none; cursor: pointer; transition: background-color 0.3s ease; text-align: center; border-radius: 5%;}
 button:hover {background-color: #757272;}
 input {background-color: #0c0c0c; color: white;}
+option {width: 180px;}
 
 /* Settings Buttons on Main Page */
 #main-options {display:flex; justify-content: center; text-align: center;}
@@ -53,18 +73,73 @@ input {background-color: #0c0c0c; color: white;}
 #report-issue-button svg {position: absolute; left: 10px; top: 50%; transform: translateY(-50%);}
 
 /* Custom Course Cards Page */
-#card-options {display:none;}
-#custom-course-header { position: relative; font-size: 22px; text-align: center; color: white;}
-#custom-banner-header {position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); font-size: 20px; padding: 2px; border-radius: 3px; white-space: nowrap; color: white;}
-#custom-name-header {position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%); font-size: 20px; padding: 2px; border-radius: 3px; white-space: nowrap; color: white;}
-#card-options-select {position: absolute; top: 22%; left: 50%; height: 40px; width: 150px; transform: translate(-50%, -50%); background-color: #0c0c0c; color: white; padding: 8px 2px;border-radius: 3px; text-align: center;}
-option {text-align: center; width: 40px;}
-#card-options-link {position: absolute; top: 43%; left: 50%; height: 30px; width: 180px; transform: translate(-50%, -50%); padding: 2px; background: #000000; border-radius: 3px; border: none;}
-#card-options-name {position: absolute; top: 68%; left: 50%; height: 30px; width: 180px; transform: translate(-50%, -50%); padding: 2px; background: #000000; border-radius: 3px; border: none;}
-#custom-image-text {position: absolute; top: 47%; left: 50%; transform: translate(-50%, -50%); color: gray; white-space: nowrap;}
-#custom-name-text {position: absolute; top: 72%; left: 50%; transform: translate(-50%, -50%); color: gray; white-space: nowrap}
-#save-banner-options {position: absolute; top: 92%; left: 72%; transform: translate(-50%, -50%); width: 40%; padding: 2px 8px;}
-#reset-banner-options {position: absolute; top: 92%; left: 28%; transform: translate(-50%, -50%); width: 40%; padding: 2px 8px; background: red;}
+#card-options {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  margin-top: -10px;
+}
+
+#custom-course-header {
+  font-size: 22px;
+  text-align: center;
+  width: 100%;
+}
+
+.course-selection {
+  margin-top: -18px;
+  width: 220px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 4px 6px 8px;
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-selection h2 {
+  margin: 0px;
+  padding-bottom: 8px;
+  font-size: 16px;
+  text-align: center;
+}
+
+#card-options-select,
+#card-options-link,
+#card-options-name {
+  width: 100%;
+  height: 30px;
+  background: #000;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 6px;
+  color: white;
+  box-sizing: border-box;
+}
+
+.course-help {
+  margin: 0;
+  font-size: 11px;
+  color: #aaa;
+  text-align: center;
+}
+
+.course-actions {
+  width: 220px;
+  display: flex;
+  gap: 8px;
+}
+
+.course-actions button {
+  flex: 1;
+  padding: 6px 0;
+}
+
+#reset-banner-options {position: absolute; top: 93%; left: 28%; transform: translate(-50%, -50%); width: 40%; padding: 2px 8px; background: red;}
+#save-banner-options {position: absolute; top: 93%; left: 72%; transform: translate(-50%, -50%); width: 40%; padding: 2px 8px;}
 
 /* Custom Themes Page */
 #custom-theme-options {display: none; flex-direction: column; align-items: center; text-align: center; color: white;}
@@ -95,10 +170,36 @@ option {text-align: center; width: 40px;}
   height: 28px;
   box-sizing: border-box;
 }
-.color-input {height: 38px; width: 38px; border: none; background: var(--inputbg); border-radius: 4px;}
-.color-input::-webkit-color-swatch, .color-input::-moz-color-swatch {border-radius: 4px; border: 7px solid #000000;}
-.color-text {width: 110px; background: #000; border-radius: 3px; border: 0px; padding: 2px; box-sizing: border-box;}
-.color-button {width:50px; border-radius: 4px; padding: 0; text-align: center; background-color: black; box-sizing: border-box;}
+.color-input {
+  height: 38px; 
+  width: 38px; 
+  border: none; 
+  background: var(--inputbg); 
+  border-radius: 4px;
+}
+
+.color-input::-webkit-color-swatch, .color-input::-moz-color-swatch {
+  border-radius: 4px; 
+  border: 7px solid #000000;
+}
+
+.color-text {
+  width: 110px; 
+  background: #000; 
+  border-radius: 3px; 
+  border: 0px; 
+  padding: 2px; 
+  box-sizing: border-box;
+}
+
+.color-button {
+  width:50px; 
+  border-radius: 4px; 
+  padding: 0; 
+  text-align: center; 
+  background-color: black; 
+  box-sizing: border-box;
+}
 
 .palette-selection h2 {
   margin: 0 0 4px 0;
@@ -107,21 +208,79 @@ option {text-align: center; width: 40px;}
 }
 
 /* Preset Themes Page */
-#preset-theme-options {display: none; text-align: center;}
-/* #preset-themes-header {position: absolute; bottom: 79%; left: 50%; transform: translate(-50%, -50%); font-size: 26px; color: white;} */
-#preset-themes-header {font-size: 22px; text-align: center; color: white;}
-#luna-button {background: #5a3a7e; color: #f67599;}
-#nightfall-button {background: #232323; color: #d82934;}
-#midnight-button {background: #030f28; color: orange;}
-#cyberspace-button {background: #030f28; color: #00ce7c;}
-#joker-button {background: #321a47; color: #99de1e;}
-#horizon-button {background: #1f1f1f; color: #f2c17b;}
-#melon-button {background: #1f4437; color: #d6686f;}
-#botanical-button {background: #7b9c98; color: #101e1c;}
-.theme-buttons {width: 100px; height: 50px; margin: 2px 2px; text-align:center;}
-.theme-buttons:hover {filter: brightness(1.15);}
-#remove-preset-theme-button {position: absolute; top: 93%; left: 28%; transform: translate(-50%, -50%); width: 40%; padding: 2px 8px; background: red;}
-#save-preset-theme-button {position: absolute; top: 93%; left: 72%; transform: translate(-50%, -50%); width: 40%; padding: 2px 8px;}
+#preset-theme-options {
+  display: none; 
+  text-align: center;
+}
+
+#preset-themes-header {
+  font-size: 22px;
+  text-align: center;
+  margin-bottom: 12px;
+  color: white;
+}
+
+#preset-theme-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px;
+}
+
+#preset-theme-buttons button {
+  height: 36px;
+  padding: 0 12px;
+  white-space: nowrap;
+  font-size: 14px;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: filter 0.2s;
+  cursor: pointer;
+  color: white;
+}
+
+#preset-theme-buttons button:hover {
+  filter: brightness(1.15);
+}
+
+/* Action buttons below */
+#preset-theme-action-buttons {
+  display: flex;
+  gap: 6px;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+#remove-preset-theme-button {
+  flex: 1;
+  font-size: 12px;
+  background-color: red;
+  color: white;
+  border-radius: 4px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+#save-preset-theme-button {
+  flex: 1;
+  background-color: #444;
+  color: white;
+  border-radius: 4px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+#save-preset-theme-button:hover {
+  filter: brightness(1.15);
+}
 
 /* Custom Fonts */
 #font-options {
@@ -162,7 +321,6 @@ option {text-align: center; width: 40px;}
   padding: 0 12px;
   white-space: nowrap;
   font-size: 14px;
-
   border-radius: 6px;
   background: #474646;
   border: 1px solid #474646;
@@ -176,7 +334,7 @@ option {text-align: center; width: 40px;}
 }
 
 #custom-font-input-container {
-    position: relative;
+  position: relative;
   bottom: 14px;
   width: 100%;
   display: flex;
@@ -203,6 +361,7 @@ option {text-align: center; width: 40px;}
   gap: 6px;
   justify-content: space-between;
 }
+
 #remove-font,
 #save-font-options {
   position: relative;
@@ -213,13 +372,19 @@ option {text-align: center; width: 40px;}
   border: none;
   cursor: pointer;
 }
+
 #remove-font {
   background-color: red;
   color: white;
 }
+
 #save-font-options {
   background-color: #444;
   color: white;
+}
+
+#save-font-options:hover {
+  filter: brightness(1.15);
 }
 
 /* Report Issue */

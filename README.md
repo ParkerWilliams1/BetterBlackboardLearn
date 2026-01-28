@@ -3,8 +3,6 @@
 # Better Blackboard Learn
 
 <p>
-  <a href="https://www.codefactor.io/repository/github/parkerwilliams1/BetterBlackboardLearn">
-    <img src="https://www.codefactor.io/repository/github/parkerwilliams1/BetterBlackboardLearn/badge" alt="CodeFactor"></a>
   <img src="https://img.shields.io/chrome-web-store/rating/ngmpmjpigceaccddpkoeejmakahopopa.svg?color=00b16a" alt="Rating">
   <img src="https://img.shields.io/chrome-web-store/users/ngmpmjpigceaccddpkoeejmakahopopa.svg?color=07f" alt="User Count">
 </p>
@@ -45,22 +43,22 @@ To install, run, and build with this repository,
 
 ```
 .
-¿¿¿ README.md
-¿¿¿ content
-¿ ¿¿¿ content.js
-¿¿¿ icons
-¿ ¿¿¿ BbOrangeGradient128.png
-¿ ¿¿¿ BbOrangeGradient48.png
-¿ ¿¿¿ BbOrangeGradient16.png
-¿¿¿ options
-¿ ¿¿¿ background.js
-¿ ¿¿¿ options.html
-¿ ¿¿¿ options.css
-¿¿¿ popup
-¿ ¿¿¿ popup.html
-¿ ¿¿¿ popup.css
-¿ ¿¿¿ popup.js
-¿¿¿ manifest.json
+ï¿½ï¿½ï¿½ README.md
+ï¿½ï¿½ï¿½ content
+ï¿½ ï¿½ï¿½ï¿½ content.js
+ï¿½ï¿½ï¿½ icons
+ï¿½ ï¿½ï¿½ï¿½ BbOrangeGradient128.png
+ï¿½ ï¿½ï¿½ï¿½ BbOrangeGradient48.png
+ï¿½ ï¿½ï¿½ï¿½ BbOrangeGradient16.png
+ï¿½ï¿½ï¿½ options
+ï¿½ ï¿½ï¿½ï¿½ background.js
+ï¿½ ï¿½ï¿½ï¿½ options.html
+ï¿½ ï¿½ï¿½ï¿½ options.css
+ï¿½ï¿½ï¿½ popup
+ï¿½ ï¿½ï¿½ï¿½ popup.html
+ï¿½ ï¿½ï¿½ï¿½ popup.css
+ï¿½ ï¿½ï¿½ï¿½ popup.js
+ï¿½ï¿½ï¿½ manifest.json
 ```
 
 ## Branding
