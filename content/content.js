@@ -196,39 +196,31 @@ function ToggleDarkMode() {
 // Function which applies user selected preset theme
 function presetThemes() {
     chrome.storage.sync.get(['theme'], result => {
-        options = result;
-        switch(options.theme) {
-            case 'luna':
-                createTheme('#5a3a7e', '#f67599');
-                break;
-            case 'nightfall':
-                createTheme('#232323', '#d82934');
-                break;
-            case 'midnight':
-                createTheme('#030f28', 'orange');
-                break;
-            case 'cyberspace':
-                createTheme('#181c18', '#00ce7c');
-                break;
-            case 'joker':
-                createTheme('#321a47', '#99de1e');
-                break;
-            case 'horizon':
-                createTheme('#1f1f1f', '#f2c17b');
-                break;
-            case 'melon':
-                createTheme('#1f4437', '#d6686f');
-                break;
-            case 'botanical':
-                createTheme('#7b9c98', '#101e1c');
-                break;
-            case 'default':
-                removeThemes();
-                break;
-            default:
-                break;
+        const selectedTheme = result.theme;
+
+        if (selectedTheme === 'default' || !selectedTheme) {
+            removeThemes();
+            return;
+        }
+
+        const themeColors = themePresets[selectedTheme];
+
+        if (themeColors) {
+            const [primary, accent] = themeColors;
+            createTheme(primary, accent);
         }
     });
+}
+
+const themePresets = {
+    'luna': ['#5a3a7e', '#f67599'],
+    'nightfall': ['#232323', '#d82934'],
+    'midnight': ['#030f28', 'orange'],
+    'cyberspace': ['#181c18', '#00ce7c'],
+    'joker': ['#321a47', '#99de1e'],
+    'horizon': ['#1f1f1f', '#f2c17b'],
+    'melon': ['#1f4437', '#d6686f'],
+    'botanical': ['#7b9c98', '#101e1c']
 }
 
 // Function for applying user selected Custom Themes
@@ -247,7 +239,7 @@ function customThemes() {
         }
         if (options.customsecondary != "default") {
             let secondaryColor = options.customsecondary;
-            let customthemecss = `h3, a.js-title-link, h1#main-heading, bdi, span, bb-translate, .filter-wrapper, label.MuiFormLabelroot-0-2-117.MuiInputLabelroot-0-2-105.makeStylesinputLabel-0-2-67.MuiInputLabelanimated-0-2-114, a.link-list-component__link.-black, .element-card .element-details .name a {color: ${secondaryColor} !important} span.grade-input-display.ready, span.points-text bdi, .points-text, span#filter-courses-value, .MuiButtonlabel-0-2-73 {color: black !important;} .base-recent-activity .activity-stream .activity-group .stream-item:hover:before {opacity: 0; background-color: transparent;} .grade-ellipsis {filter: brightness(0);} span.link-text, bdi.makeStylesbaseText-0-2-90, .makeStylesbaseText-0-2-79, bdi.makeStylesbaseText-0-2-149 {color: white !important;}`;
+            let customthemecss = `h3, a.js-title-link, h1#main-heading, bdi, span, bb-translate, .filter-wrapper, label.MuiFormLabelroot-0-2-117.MuiInputLabelroot-0-2-105.makeStylesinputLabel-0-2-67.MuiInputLabelanimated-0-2-114, a.link-list-component__link.-black, .element-card .element-details .name a, .course-overview-management {color: ${secondaryColor} !important} span.grade-input-display.ready, span.points-text bdi, .points-text, span#filter-courses-value, .MuiButtonlabel-0-2-73 {color: black !important;} .base-recent-activity .activity-stream .activity-group .stream-item:hover:before {opacity: 0; background-color: transparent;} .grade-ellipsis {filter: brightness(0);} span.link-text, bdi.makeStylesbaseText-0-2-90, .makeStylesbaseText-0-2-79, bdi.makeStylesbaseText-0-2-149 {color: white !important;}`;
             createSheet('customsecondary', customthemecss);
         } else {
             const secondary = document.querySelectorAll('.customsecondary');
@@ -257,7 +249,54 @@ function customThemes() {
         }
         if (options.customsidebar != "default") {
             let sidebarColor = options.customsidebar;
-            let customthemecss = `.base #side-menu .bb-inner-wrap>header .branding, .base .color-selection-preview-mode .bb-inner-wrap>header .branding {background-color: ${sidebarColor} !important;} .base #side-menu .off-canvas-list .base-navigation-button:first-child {background-color: ${sidebarColor} !important;} .base .side-menu-footer {background-color: ${sidebarColor} !important} .base #side-menu .off-canvas-list .base-navigation-button.active .theme-border-left-active, .base .color-selection-preview-mode .off-canvas-list .base-n    avigation-button.active .theme-border-left-active {background-color: ${sidebarColor} !important; filter: brightness(135%) !important;} .base #side-menu .off-canvas-list .base-navigation-button .base-navigation-button-content:hover {background-color: ${sidebarColor} !important;}`;
+            let customthemecss = `#base_tools *,
+                #base_tools *:hover,
+                #base_tools *:active,
+                #base_tools *:focus {
+                    transition: none !important;
+                    transition-property: none !important;
+                    transition-duration: 0s !important;
+                    transition-delay: 0s !important;
+                    transition-timing-function: none !important;
+                    animation: none !important;
+                }
+
+                div[data-analytics-id="base.navigation.drawer"] > :first-child > :nth-child(2),
+                div[data-analytics-id="base.navigation.drawer"] > :first-child > :nth-child(3) {
+                    background: ${sidebarColor} !important;
+                }
+
+                header[role="banner"] > :first-child, 
+                .color-selection-live-mode .themed-logo-background-primary-fill {
+                    background-color: ${sidebarColor} !important;
+                    padding: 0px;
+                }
+            
+                /* Force your hover color - target existing elements */
+                #base_tools a:hover,
+                #base_tools li:hover > a,
+                #base_tools li:hover .MuiButtonBase-root {
+                    background: ${sidebarColor} !important;
+                    filter: brightness(1.5);
+                }
+
+                /* Active state */
+                #base_tools a.active,
+                #base_tools a[class*="active"],
+                #base_tools li.active > a {
+                    background: ${sidebarColor} !important;
+                    filter: brightness(1.3);
+                }
+
+                .color-selection-live-mode .themed-background-primary-fill-only, .color-selection-live-mode.themed-background-primary-fill-only, .color-selection-live-mode .themed-background-primary-alt-fill-only.disabled:hover, .color-selection-live-mode .integration-navigation-button-content.themed-background-primary-alt-fill-only, .color-selection-live-mode .integration-navigation-button-content-v2.themed-background-primary-alt-fill-only {
+                  border: ${sidebarColor} 0px solid
+                }
+
+                .react-container {
+                  background: ${sidebarColor}
+                }
+             `;
+
             createSheet('customsidebar', customthemecss);
         } else {
             const sidebar = document.querySelectorAll('.customsidebar');
@@ -360,7 +399,7 @@ function createTheme(primaryColor, secondaryColor) {
 // Function to Remove Preset Theme
 function removeThemes() {
     const themes = document.querySelectorAll('.theme');
-        themes.forEach(element => {
-            element.parentNode.removeChild(element);
-        });
+    themes.forEach(element => {
+        element.parentNode.removeChild(element);
+    });
 }

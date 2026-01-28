@@ -1,4 +1,4 @@
-var title = document.getElementById('title');
+var title = document.getElementById('header');
 var mainoptions = document.getElementById('main-options');
 var cardoptions = document.getElementById('card-options');
 var customthemeoptions = document.getElementById('custom-theme-options');
@@ -14,7 +14,7 @@ var courseNameMap = new Map();
 document.getElementById('custom-fonts-button').onclick = function() {
   title.style.display = 'none';
   mainoptions.style.display = 'none';
-  fontoptions.style.display = 'block';
+  fontoptions.style.display = 'flex';
 }
 document.getElementById("preset-themes-button").onclick = function() {
   title.style.display = 'none';
@@ -24,7 +24,7 @@ document.getElementById("preset-themes-button").onclick = function() {
 document.getElementById("custom-themes-button").onclick = function() {
   title.style.display = 'none';
   mainoptions.style.display = 'none';
-  customthemeoptions.style.display = 'block';
+  customthemeoptions.style.display = 'flex';
 }
 
 document.getElementById("report-issue-button").onclick = function() {
@@ -273,45 +273,44 @@ document.getElementById('save-custom-theme-button').onclick = function() {
 }
 
 /* Custom Font Buttons */
-document.getElementById('pixelify-font').onclick = function() {
-  chrome.storage.sync.set({'customfont' : 'Pixelify Sans'});
+const fontButtons = document.getElementById('custom-font-buttons');
+
+fontButtons.addEventListener('click', (e) => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+
+  const font = btn.dataset.font;
+  if (!font) return;
+
+  setCustomFont(font);
+});
+
+function setCustomFont(fontName) {
+  chrome.storage.sync.set({ customfont: fontName });
 }
-document.getElementById('kanit-font').onclick = function() {
-  chrome.storage.sync.set({'customfont' : 'Kanit'});
-}
-document.getElementById('madimi-font').onclick = function() {
-  chrome.storage.sync.set({'customfont' : 'Madimi One'});
-}
-document.getElementById('anta-font').onclick = function() {
-  chrome.storage.sync.set({'customfont' : 'Anta'});
-}
-document.getElementById('comfortaa-font').onclick = function() {
-  chrome.storage.sync.set({'customfont' : 'Comfortaa'});
-}
-document.getElementById('oswald-font').onclick = function() {
-  chrome.storage.sync.set({'customfont' : 'Oswald'});
-}
-document.getElementById('rubik-font').onclick = function() {
-  chrome.storage.sync.set({'customfont' : 'Rubik'});
-}
-document.getElementById('bebas-font').onclick = function() {
-  chrome.storage.sync.set({'customfont' : 'Bebas Neue'});
-}
-document.getElementById('pacifico-font').onclick = function() {
-  chrome.storage.sync.set({'customfont' : 'Pacifico'});
-}
-document.getElementById('lobster-font').onclick = function() {
-  chrome.storage.sync.set({'customfont' : 'Lobster'});
+
+document.getElementById('save-font-options').onclick = () => {
+  const custom = document.getElementById('user-custom-font').value.trim();
+  if (custom) setCustomFont(custom);
+};
+
+
+function applyCustomFont() {
+  let custom = document.getElementById('user-custom-font').value;
+  if (custom) {
+    chrome.storage.sync.set({'customfont': custom});
+  }
 }
 
 // Menu Traversal for Font Options
-document.getElementById('remove-font').onclick = function() {
-  chrome.storage.sync.set({'customfont' : 'default'});
+document.getElementById('remove-font').onclick = () => {
+  setCustomFont('default');
   title.style.display = 'block';
   mainoptions.style.display = 'block';
   fontoptions.style.display = 'none';
-}
+};
 document.getElementById('save-font-options').onclick = function() {
+  applyCustomFont();
   title.style.display = 'block';
   mainoptions.style.display = 'block';
   fontoptions.style.display = 'none';

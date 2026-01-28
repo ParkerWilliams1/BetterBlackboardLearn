@@ -4,9 +4,9 @@
     <body>
       <link rel="stylesheet" href="popup.css">
       <div id="gradient"></div>
-      <div id="title">
-      <h3 id="heading">Better Blackboard</h3>
-      <img class="BB-logo" src="../icons/BbOrangeGradient48.png" width="20px">
+      <div id="header">
+        <h1 id="title">Better Blackboard</h1>
+        <img class="BB-logo" src="../icons/BbOrangeGradient48.png" width="20px">
       </div>
         <div id="main-options">
           <div class="dark-theme">
@@ -49,30 +49,36 @@
         <div id="custom-theme-options">
           <h3 id="custom-theme-header">Create Theme</h3>
           <div class="palette-selection primary-palette">
-            <h2>Background Color</h2>
-            <input type="color" value="#1F1F1F" class="color-input" id="primary-color-input"></input>
-            <input type="text" value="#1F1F1F" class="color-text" id="primary-color-text" onchange="updateColor(this)"/>
-            <button class="color-button" id="primary-color-button">Go</button>
+            <h2>Primary Color</h2>
+            <div class="palette-row">
+              <input type="color" value="#1F1F1F" class="color-input" id="primary-color-input"></input>
+              <input type="text" value="#1F1F1F" class="color-text" id="primary-color-text" onchange="updateColor(this)"/>
+              <button class="color-button" id="primary-color-button">Apply</button>
+            </div>
           </div>
         
           <div class="palette-selection secondary-palette">
-            <h2>Text Color</h2>
-            <input type="color" value="#FFFFFF" class="color-input" id="secondary-color-input"></input>
-            <input type="text" value="#FFFFFF" class="color-text" id="secondary-color-text" onchange="updateColor(this)"/>
-            <button class="color-button" id="secondary-color-button">Go</button>
+            <h2>Accent Color</h2>
+            <div class="palette-row">
+              <input type="color" value="#FFFFFF" class="color-input" id="secondary-color-input"></input>
+              <input type="text" value="#FFFFFF" class="color-text" id="secondary-color-text" onchange="updateColor(this)"/>
+              <button class="color-button" id="secondary-color-button">Apply</button>
+            </div>
           </div>
         
           <div class="palette-selection sidebar-palette">
             <h2>Sidebar Color</h2>
-            <input type="color" value="#102D70" class="color-input" id="sidebar-color-input"></input>
-            <input type="text" value="#102D70" class="color-text" id="sidebar-color-text" onchange="updateColor(this)"/>
-            <button class="color-button" id="sidebar-color-button">Go</button>
+            <div class="palette-row">
+              <input type="color" value="#102D70" class="color-input" id="sidebar-color-input"></input>
+              <input type="text" value="#102D70" class="color-text" id="sidebar-color-text" onchange="updateColor(this)"/>
+              <button class="color-button" id="sidebar-color-button">Apply</button>
+            </div>
           </div>
         
           <button id="remove-custom-theme-button">Remove<br>Theme</button>
           <button id="save-custom-theme-button">Save<br>Theme</button>
         </div>
-
+      
         <div id="preset-theme-options">
           <h2 id="preset-themes-header">Themes</h2>
           <button class="theme-buttons" id="luna-button">Luna</button>
@@ -109,19 +115,29 @@
         <div id="font-options">
           <h3 id="custom-fonts-header">Custom Fonts</h3>
           <div id="custom-font-buttons">
-            <button id="pixelify-font">Pixelify</button>
-            <button id="kanit-font">Kanit</button>
-            <button id="madimi-font">Madimi</button>
-            <button id="anta-font">Anta</button>
-            <button id="comfortaa-font">Comfortaa</button>
-            <button id="oswald-font">Oswald</button>
-            <button id="rubik-font">Rubik</button>
-            <button id="bebas-font">Bebas</button>
-            <button id="pacifico-font">Pacifico</button>
-            <button id="lobster-font">Lobster</button>
+            <button data-font="Pixelify Sans">Pixelify</button>
+            <button data-font="Kanit">Kanit</button>
+            <button data-font="Anta">Anta</button>
+            <button data-font="Oswald">Oswald</button>
+            <button data-font="Rubik">Rubik</button>
+            <button data-font="Bebas Neue">Bebas</button>
+            <button data-font="Lobster">Lobster</button>
+            <button data-font="Open Sans">Open</button>
+            <button data-font="Roboto Mono">Roboto</button>
+            <button data-font="Space Mono">Space</button>
+            <button data-font="Eczar Handgloves">Eczar</button>
+            <button data-font="Fira Sans Handgloves">Fira</button>
+            <button data-font="Bungee">Bungee</button>
+            <button data-font="Roboto Slab">Slab</button>
           </div>
-          <button id="remove-font">Remove<br>Font</button>
-          <button id="save-font-options">Save<br>Font</button>
+
+          <div id="custom-font-input-container">
+            <input id="user-custom-font" placeholder="Enter Custom Google Font">
+            <div id="custom-font-action-buttons">
+              <button id="remove-font">Remove</button>
+              <button id="save-font-options">Save</button>
+            </div>
+          </div>
         </div>
 
         <div id="report-issue-options">
