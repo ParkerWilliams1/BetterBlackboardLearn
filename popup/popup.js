@@ -16,11 +16,13 @@ document.getElementById('custom-fonts-button').onclick = function() {
   mainoptions.style.display = 'none';
   fontoptions.style.display = 'flex';
 }
+
 document.getElementById("preset-themes-button").onclick = function() {
   title.style.display = 'none';
   mainoptions.style.display = 'none';
-  presetthemeoptions.style.display = 'block';
+  presetthemeoptions.style.display = 'flex';
 }
+
 document.getElementById("custom-themes-button").onclick = function() {
   title.style.display = 'none';
   mainoptions.style.display = 'none';
@@ -28,10 +30,9 @@ document.getElementById("custom-themes-button").onclick = function() {
 }
 
 document.getElementById("report-issue-button").onclick = function() {
-  document.body.style.height = '240px';
   title.style.display = 'none';
   mainoptions.style.display = 'none';
-  reportissueoptions.style.display = 'block';
+  reportissueoptions.style.display = 'flex';
 }
 
 document.getElementById("custom-cards-button").onclick = function() {
@@ -158,25 +159,24 @@ document.getElementById('dark-theme-button').onclick = function() {
   });
 };
 
-
-
 /* Preset Custom Themes */
 const presetThemes = [
-  { name: "Luna", primary: "#5a3a7e", accent: "#f67599" },
-  { name: "Nightfall", primary: "#232323", accent: "#d82934" },
-  { name: "Midnight", primary: "#030f28", accent: "orange" },
-  { name: "Cyber", primary: "#030f28", accent: "#00ce7c" },
-  { name: "Joker", primary: "#321a47", accent: "#99de1e" },
-  { name: "Horizon", primary: "#1f1f1f", accent: "#f2c17b" },
-  { name: "Melon", primary: "#1f4437", accent: "#d6686f" },
-  { name: "Botanical", primary: "#7b9c98", accent: "#101e1c" },
-  { name: "Flare", primary: "#cd4412", accent: "#ffd93c" },
-  { name: "Ocean", primary: "#012e40", accent: "#00b4d8" },
-  { name: "Aurora", primary: "#0d1b2a", accent: "#00ff94" },
-  { name: "Candy", primary: "#ff79c6", accent: "#fff5b7" },
-  { name: "Storm", primary: "#2e2f3e", accent: "#9d00ff" },
-  { name: "Forest", primary: "#1b3b1b", accent: "#7bc950" },
-  { name: "Retro Neon", primary: "#3a2e49", accent: "#ff00ff" }
+  { name: "Luna", primary: "#5a3a7e", accent: "#f67599", sidebar: "#3f2859" },
+  { name: "Nightfall", primary: "#232323", accent: "#d82934", sidebar: "#141414" },
+  { name: "Midnight", primary: "#030f28", accent: "orange", sidebar: "#020918" },
+  { name: "Cyber", primary: "#030f28", accent: "#00ce7c", sidebar: "#02101f" },
+  { name: "Joker", primary: "#321a47", accent: "#99de1e", sidebar: "#20112f" },
+  { name: "Horizon", primary: "#1f1f1f", accent: "#f2c17b", sidebar: "#121212" },
+  { name: "Melon", primary: "#1f4437", accent: "#d6686f", sidebar: "#142c23" },
+  { name: "Botanical", primary: "#7b9c98", accent: "#101e1c", sidebar: "#4f6f6b" },
+
+  { name: "Flare", primary: "#cd4412", accent: "#ffd93c", sidebar: "#8a2d0c" },
+  { name: "Ocean", primary: "#012e40", accent: "#00b4d8", sidebar: "#011d29" },
+  { name: "Aurora", primary: "#0d1b2a", accent: "#00ff94", sidebar: "#08121d" },
+  { name: "Candy", primary: "#ff79c6", accent: "#fff5b7", sidebar: "#c84f9b" },
+  { name: "Storm", primary: "#2e2f3e", accent: "#9d00ff", sidebar: "#1e1f2a" },
+  { name: "Forest", primary: "#1b3b1b", accent: "#7bc950", sidebar: "#112611" },
+  { name: "Retro Neon", primary: "#3a2e49", accent: "#ff00ff", sidebar: "#241d30" }
 ];
 
 const themeContainer = document.getElementById("preset-theme-buttons");
@@ -188,7 +188,7 @@ presetThemes.forEach(theme => {
   btn.classList.add("theme-buttons");
 
   btn.addEventListener("click", () => {
-    chrome.storage.sync.set({ theme: { primary: theme.primary, accent: theme.accent } });
+    chrome.storage.sync.set({ theme: { primary: theme.primary, accent: theme.accent, sidebar: theme.sidebar } });
   });
 
   themeContainer.appendChild(btn);
@@ -204,8 +204,6 @@ document.getElementById('save-preset-theme-button').onclick = function() {
   mainoptions.style.display = 'block';
   presetthemeoptions.style.display = 'none';
 }
-
-
 
 /* Color Pickers */
 var primarycolorPicker = document.getElementById('primary-color-input');
@@ -234,7 +232,6 @@ sidebarcolorPicker.addEventListener('input', function() {
 sidebarText.addEventListener('input', function() {
   sidebarcolorPicker.value = sidebarText.value;
 });
-
 
 /* User-Made Custom Theme */
 document.getElementById('primary-color-button').onclick = function() {
@@ -281,27 +278,55 @@ document.getElementById('save-custom-theme-button').onclick = function() {
 }
 
 /* Custom Font Buttons */
-const fontButtons = document.getElementById('custom-font-buttons');
+const presetFonts = [
+  { label: "Pixelify", family: "Pixelify Sans" },
+  { label: "Kanit", family: "Kanit" },
+  { label: "Anta", family: "Anta" },
+  { label: "Rubik", family: "Rubik" },
+  { label: "Open", family: "Open Sans" },
+  { label: "Roboto", family: "Roboto Mono" },
+  { label: "Space", family: "Space Mono" },
+  { label: "Eczar", family: "Eczar Handgloves" },
+  { label: "Fira", family: "Fira Sans Handgloves" },
+  { label: "Bungee", family: "Bungee" },
+  { label: "Slab", family: "Roboto Slab" },
+  { label: "Poppins", family: "Poppins" },
+  { label: "Montserrat", family: "Montserrat" },
+  { label: "Comfort", family: "Comfortaa" },
+  { label: "Quicksand", family: "Quicksand" },
+  { label: "Nunito", family: "Nunito" }
+];
 
-fontButtons.addEventListener('click', (e) => {
-  const btn = e.target.closest('button');
+const fontButtons = document.getElementById('custom-font-buttons');
+fontButtons.textContent = "";
+
+presetFonts.forEach(font => {
+  const btn = document.createElement("button");
+
+  btn.textContent = font.label;
+  btn.dataset.font = font.family;
+  btn.style.fontFamily = `'${font.family}', sans-serif`;
+
+  fontButtons.appendChild(btn);
+});
+
+fontButtons.addEventListener("click", (e) => {
+  const btn = e.target.closest("button");
   if (!btn) return;
 
   const font = btn.dataset.font;
   if (!font) return;
 
   setCustomFont(font);
+
+  // Reflect in text input
+  const input = document.getElementById("user-custom-font");
+  if (input) input.value = font;
 });
 
 function setCustomFont(fontName) {
   chrome.storage.sync.set({ customfont: fontName });
 }
-
-document.getElementById('save-font-options').onclick = () => {
-  const custom = document.getElementById('user-custom-font').value.trim();
-  if (custom) setCustomFont(custom);
-};
-
 
 function applyCustomFont() {
   let custom = document.getElementById('user-custom-font').value;

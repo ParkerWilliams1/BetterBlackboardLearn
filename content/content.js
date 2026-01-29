@@ -10,15 +10,9 @@ function isDomainBlackboardPage() {
         })
         .then(data => {
             if (data && data.userName) {
-                console.log("Yes this is a Blackboard URL");
                 startExtension();
-            } else {
-                console.log("No, this is not a Blackboard URL");
             }
         })
-        .catch(error => {
-            console.log("No, this is not a Blackboard URL", error);
-        });
 }
 
 
@@ -33,12 +27,12 @@ function startExtension() {
     loadCustomCourses();
     ToggleDarkMode();
     getUser()
-.then(() => {
-    return getCoursesId();
-})
-.then(() => {
-    return getShortenedNames();
-})
+    .then(() => {
+        return getCoursesId();
+    })
+    .then(() => {
+        return getShortenedNames();
+    })
 
     chrome.storage.sync.get(null, result => {
         options = { ...options, ...result };
@@ -56,7 +50,6 @@ function applyOptionsChanges(changes) {
     options = { ...options, ...rewrite };
 
     Object.keys(changes).forEach(key => {
-        console.log(key + " changed");
         switch (key) {
             case ("colorscheme"):
                 ToggleDarkMode();
@@ -184,8 +177,7 @@ function ToggleDarkMode() {
     chrome.storage.sync.get(['colorscheme'], result => {
         options = result;
         if (options.colorscheme === 'dark') {
-            let darkthemecss = `.inner-wrap, li.stream-item-container.notification-default:hover, .element-details.summary, .element-image, .link-list-component.link-list-image-left, .fc-time-grid-event {background: #1f1f1f !important;} .MuiSvgIconfrontSizeLarge-0-2-66, svg.MuiSvgIconroot-0-2-58.makeStylesdirectionalIcon-0-2-57.makeStylesstrokeIcon-0-2-56.MuiSvgIconcolorPrimary-0-2-59.MuiSvgIconfontSizeLarge-0-2-66, .base-courses-header-container.base-header.themed-background-primary-medium-down.color-selection-live-mode, nav.term-navigator, svg.MuiSvgIconroot-0-2-58.makeStylesstrokeIcon-0-2-56.MuiSvgIconcolorPrimary-0-2-59.MuiSvgIconfontSizeLarge-0-2-66, .element-card.bar, li.data-row.can-edit, li.data-row, .element-card.tile.course-color-classic.base-grades-course-tile.active-course, .messages-header.js-course-skip-link-target.flex-container, .element-card.due-item.element-card-deadline.course-color-2, .element-card.element-card-deadline, .calendar-wrapper .element-card-container {background: #1f1f1f !important} .MuiSvgIconcolorPrimary-0-2-59, .base-recent-activity .activity-stream .activity-group .stream-item .element-details .context a, .base-recent-activity .activity-stream .activity-group .stream-item .element-details .content, span.date, h2.activity-group-title, span.heading-date, span.time, h2, .js-course-title-element, .multi-column-course-id, span.banner__title-text, h3.subheader.module-wrapper__title, span.link-text, bdi.makeStylesbaseText-0-2-68, .makeStylesbaseText-0-2-138, a.link-list-component__link.-black, .MuiSvgIconcolorPrimary-0-2-81, svg:not(:root), .calendar-wrapper .calendar-head-container .month-container .month a, .calendar-wrapper .calendar-week .week-letter, .calendar-wrapper .calendar-week .week-day button, .base-grades-wrapper .base-grades-term-wrapper .row.grades-header a, .base-grades-wrapper .base-grades-term-wrapper, .base-grades .grades-list .element-card .element-details .name a, h4.section-title, .messages-container-summary .messages-header .title a, h3, .element-card .element-details .name a {color:white !important;} a.js-title-link, h1#main-heading, bdi, span, bb-translate, .filter-wrapper, label.MuiFormLabelroot-0-2-117.MuiInputLabelroot-0-2-105.makeStylesinputLabel-0-2-67.MuiInputLabelanimated-0-2-114, .js-course-skip-link-target, .calendar-wrapper .fc-event-container .element-card .fc-title a, .calendar-wrapper .fc-event-container .element-card .course-link a {color: white !important} span.grade-input-display.ready, span.points-text bdi, .points-text, span#filter-courses-value, .MuiButtonlabel-0-2-73 {color: black !important;} .base-recent-activity .activity-stream .activity-group .stream-item:hover:before {opacity: 0; background-color: transparent;} .grade-ellipsis {filter: brightness(0);} span.ellipse, span#filter-stream-value {color: gray !important;} a.link-list-component__link.-black, .MuiSvgIconcolorPrimary-0-2-58 {background: #1f1f1f !important; color: white !important;} [bb-click-to-invoke-child].child-is-invokable {background: transparent !important;}`;
-            createSheet('darkthemeinject', darkthemecss);
+            createTheme("#1f1f1f", "white", "#161515", "darkthemeinject");
         } else if (options.colorscheme === 'default') {
             const darkthemeinject = document.querySelectorAll('.darkthemeinject');
             darkthemeinject[0].parentNode.removeChild(darkthemeinject[0]);
@@ -203,8 +195,8 @@ function presetThemes() {
             return;
         }
 
-        const { primary, accent } = selectedTheme;
-        createTheme(primary, accent);
+        const { primary, accent, sidebar } = selectedTheme;
+        createTheme(primary, accent, sidebar, "theme");
     });
 }
 
@@ -376,9 +368,54 @@ function createSheet(className, css) {
 }
 
 // Function to make Preset Theme w/ Two Colors
-function createTheme(primaryColor, secondaryColor) {
-    let css = `.inner-wrap, li.stream-item-container.notification-default:hover, .element-details.summary, .shadow, .base-profile .profile-content .user-information section ul .data-row, .base-profile .profile-content .user-settings section ul .data-row, .element-image, .element-card.tile.course-color-classic.base-grades-course-tile.active-course, .messages-header.js-course-skip-link-target.flex-container, .element-card.due-item.element-card-deadline.course-color-2, .element-card.element-card-deadline, .calendar-wrapper .element-card-container, .fc-time-grid-event {background: ${primaryColor} !important;} .MuiSvgIconfrontSizeLarge-0-2-66, svg.MuiSvgIconroot-0-2-58.makeStylesdirectionalIcon-0-2-57.makeStylesstrokeIcon-0-2-56.MuiSvgIconcolorPrimary-0-2-59.MuiSvgIconfontSizeLarge-0-2-66, .base-courses-header-container.base-header.themed-background-primary-medium-down.color-selection-live-mode, nav.term-navigator, svg.MuiSvgIconroot-0-2-58.makeStylesstrokeIcon-0-2-56.MuiSvgIconcolorPrimary-0-2-59.MuiSvgIconfontSizeLarge-0-2-66, .element-card.bar {background: ${primaryColor} !important} .MuiSvgIconcolorPrimary-0-2-59, .base-recent-activity .activity-stream .activity-group .stream-item .element-details .context a, .base-recent-activity .activity-stream .activity-group .stream-item .element-details .content, span.date, h2.activity-group-title, span.heading-date, span.time, h2, .js-course-title-element, .multi-column-course-id, span.banner__title-text, h3.subheader.module-wrapper__title, span.link-text, bdi.makeStylesbaseText-0-2-68, .makeStylesbaseText-0-2-138, bdi.makeStylesbaseText-0-2-149, .MuiSvgIconcolorPrimary-0-2-81, svg:not(:root), .calendar-wrapper .calendar-head-container .month-container .month a, .calendar-wrapper .calendar-week .week-letter, .calendar-wrapper .calendar-week .week-day button, .base-grades-wrapper .base-grades-term-wrapper .row.grades-header a, .base-grades-wrapper .base-grades-term-wrapper, .base-grades .grades-list .element-card .element-details .name a, h4.section-title, .messages-container-summary .messages-header .title a, .calendar-wrapper .fc-event-container .element-card .fc-title a, .calendar-wrapper .fc-event-container .element-card .course-link a {color:white !important;} a.js-title-link, h1#main-heading, bdi, span, bb-translate, .filter-wrapper, h3, .element-card .element-details .name a {color: ${secondaryColor} !important} span.grade-input-display.ready, span.points-text bdi, .points-text, span#filter-courses-value, .MuiButtonlabel-0-2-73 {color: black !important;} .base-recent-activity .activity-stream .activity-group .stream-item:hover:before {opacity: 0; background-color: transparent;} .grade-ellipsis {filter: brightness(0);} a.link-list-component__link.-black, .bb-ui-content-icon, .MuiSvgIconcolorPrimary-0-2-58, .link-list-component.link-list-image-left {background: ${primaryColor} !important; color: ${secondaryColor} !important} bdi.makeStylesbaseText-0-2-45, bdi.makeStylesbaseText-0-2-79, bdi.makeStylesbaseText-0-2-90 {color: white !important;} [bb-click-to-invoke-child].child-is-invokable, svg:not(:root) {background: transparent !important;}`;
-    createSheet('theme', css);
+function createTheme(primaryColor, secondaryColor, sidebarColor, classname) {
+    let css = `bb-ui-icon-large-assignments.react-container, bb-ui-icon-large-announcement.react-container, bb-ui-icon-large-grades.react-container, bb-ui-icon-large-document-text.react-container, bb-ui-icon-large-kudos.react-container, bb-ui-icon-large-course.react-container {background: ${primaryColor} !important;} .inner-wrap, li.stream-item-container.notification-default:hover, .element-details.summary, .shadow, .base-profile .profile-content .user-information section ul .data-row, .base-profile .profile-content .user-settings section ul .data-row, .element-image, .element-card.tile.course-color-classic.base-grades-course-tile.active-course, .messages-header.js-course-skip-link-target.flex-container, .element-card.due-item.element-card-deadline.course-color-2, .element-card.element-card-deadline, .calendar-wrapper .element-card-container, .fc-time-grid-event {background: ${primaryColor} !important;} .MuiSvgIconfrontSizeLarge-0-2-66, svg.MuiSvgIconroot-0-2-58.makeStylesdirectionalIcon-0-2-57.makeStylesstrokeIcon-0-2-56.MuiSvgIconcolorPrimary-0-2-59.MuiSvgIconfontSizeLarge-0-2-66, .base-courses-header-container.base-header.themed-background-primary-medium-down.color-selection-live-mode, nav.term-navigator, svg.MuiSvgIconroot-0-2-58.makeStylesstrokeIcon-0-2-56.MuiSvgIconcolorPrimary-0-2-59.MuiSvgIconfontSizeLarge-0-2-66, .element-card.bar {background: ${primaryColor} !important} .MuiSvgIconcolorPrimary-0-2-59, .base-recent-activity .activity-stream .activity-group .stream-item .element-details .context a, .base-recent-activity .activity-stream .activity-group .stream-item .element-details .content, span.date, h2.activity-group-title, span.heading-date, span.time, h2, .js-course-title-element, .multi-column-course-id, span.banner__title-text, h3.subheader.module-wrapper__title, span.link-text, bdi.makeStylesbaseText-0-2-68, .makeStylesbaseText-0-2-138, bdi.makeStylesbaseText-0-2-149, .MuiSvgIconcolorPrimary-0-2-81, svg:not(:root), .calendar-wrapper .calendar-head-container .month-container .month a, .calendar-wrapper .calendar-week .week-letter, .calendar-wrapper .calendar-week .week-day button, .base-grades-wrapper .base-grades-term-wrapper .row.grades-header a, .base-grades-wrapper .base-grades-term-wrapper, .base-grades .grades-list .element-card .element-details .name a, h4.section-title, .messages-container-summary .messages-header .title a, .calendar-wrapper .fc-event-container .element-card .fc-title a, .calendar-wrapper .fc-event-container .element-card .course-link a {color:white !important;} a.js-title-link, h1#main-heading, bdi, span, bb-translate, .filter-wrapper, h3, .element-card .element-details .name a {color: ${secondaryColor} !important} span.grade-input-display.ready, span.points-text bdi, .points-text, span#filter-courses-value, .MuiButtonlabel-0-2-73 {color: black !important;} .base-recent-activity .activity-stream .activity-group .stream-item:hover:before {opacity: 0; background-color: transparent;} .grade-ellipsis {filter: brightness(0);} a.link-list-component__link.-black, .bb-ui-content-icon, .MuiSvgIconcolorPrimary-0-2-58, .link-list-component.link-list-image-left {background: ${primaryColor} !important; color: ${secondaryColor} !important} bdi.makeStylesbaseText-0-2-45, bdi.makeStylesbaseText-0-2-79, bdi.makeStylesbaseText-0-2-90 {color: white !important;} [bb-click-to-invoke-child].child-is-invokable, svg:not(:root) {background: transparent !important;}
+    #base_tools *:hover,
+                #base_tools *:active,
+                #base_tools *:focus {
+                    transition: none !important;
+                    transition-property: none !important;
+                    transition-duration: 0s !important;
+                    transition-delay: 0s !important;
+                    transition-timing-function: none !important;
+                    animation: none !important;
+                }
+
+                div[data-analytics-id="base.navigation.drawer"] > :first-child > :nth-child(2),
+                div[data-analytics-id="base.navigation.drawer"] > :first-child > :nth-child(3) {
+                    background: ${sidebarColor} !important;
+                }
+
+                header[role="banner"] > :first-child, 
+                .color-selection-live-mode .themed-logo-background-primary-fill {
+                    background-color: ${sidebarColor} !important;
+                    padding: 0px;
+                }
+            
+                /* Force your hover color - target existing elements */
+                #base_tools a:hover,
+                #base_tools li:hover > a,
+                #base_tools li:hover .MuiButtonBase-root {
+                    background: ${sidebarColor} !important;
+                    filter: brightness(1.5);
+                }
+
+                /* Active state */
+                #base_tools a.active,
+                #base_tools a[class*="active"],
+                #base_tools li.active > a {
+                    background: ${sidebarColor} !important;
+                    filter: brightness(1.3);
+                }
+
+                .color-selection-live-mode .themed-background-primary-fill-only, .color-selection-live-mode.themed-background-primary-fill-only, .color-selection-live-mode .themed-background-primary-alt-fill-only.disabled:hover, .color-selection-live-mode .integration-navigation-button-content.themed-background-primary-alt-fill-only, .color-selection-live-mode .integration-navigation-button-content-v2.themed-background-primary-alt-fill-only {
+                  border: ${sidebarColor} 0px solid
+                }
+
+                .react-container {
+                  background: ${sidebarColor}
+                }`;
+    createSheet(classname, css);
 }
 
 // Function to Remove Preset Theme
