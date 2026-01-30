@@ -176,7 +176,8 @@ const presetThemes = [
   { name: "Candy", primary: "#ff79c6", accent: "#fff5b7", sidebar: "#c84f9b" },
   { name: "Storm", primary: "#2e2f3e", accent: "#9d00ff", sidebar: "#1e1f2a" },
   { name: "Forest", primary: "#1b3b1b", accent: "#7bc950", sidebar: "#112611" },
-  { name: "Retro Neon", primary: "#3a2e49", accent: "#ff00ff", sidebar: "#241d30" }
+  { name: "Retro Neon", primary: "#3a2e49", accent: "#ff00ff", sidebar: "#241d30" },
+  { name: "Gruvbox", primary: "#282828", accent: "#fabd2f", sidebar: "#1d2021" }
 ];
 
 const themeContainer = document.getElementById("preset-theme-buttons");
