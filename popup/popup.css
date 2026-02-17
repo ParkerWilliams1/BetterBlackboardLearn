@@ -75,8 +75,7 @@ input {
 option {
   width: 180px;
 }
-
-.action-buttons {
+ .action-buttons {
   display: flex !important;
   flex-direction: row !important;
   justify-content: space-between !important;
@@ -91,13 +90,22 @@ option {
   flex-direction: row;
   width: 112px !important;
   height: 44px !important;
-  border-radius: 4px;
+  border-radius: 14px;
   color: white;
   font-size: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.2s ease;
 }
 
+.save-setting-button:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+
 .remove-setting-button {
-  background-color: red;
+  background: red;
+  border: white;
 }
 
 #card-options .action-buttons {
@@ -110,17 +118,51 @@ option {
 }
 
 /* Settings Buttons on Main Page */
-#main-options {display:flex; justify-content: center; text-align: center;}
+#main-options {
+  display:flex; 
+  justify-content: center; 
+  text-align: center;
+}
+
+#main-options button {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  color: white;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+#main-options button:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+#main-options button svg {
+  transition: all 0.2s ease;
+}
 #dark-theme-button {position: absolute; height: 45px; width: 55%; top: 24%; left: 50%; transform: translate(-50%, -50%); padding-left: 30px; border-radius: 5px;}
-.dark-theme button svg {fill: white; height: 50%; width: 50%; position: absolute; left: -13px; top: 50%; transform: translateY(-50%);}
+
+#dark-theme-button.active {
+    background: linear-gradient(rgba(0, 255, 50, 0.6), rgba(0, 255, 50, 0.6)), 
+                rgba(255, 255, 255, 0.2) !important;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(0, 255, 50, 0.5);
+}
+
+#dark-theme-button:hover {
+    filter: brightness(1.15);
+}
+
+.dark-theme button svg {height: 50%; width: 50%; position: absolute; left: -13px; top: 50%; transform: translateY(-50%);}
 #custom-cards-button {position: absolute; padding-bottom: 10px; height: 100px; width: 100px; top: 44%; left: 71%; transform: translate(-50%, -50%);}
-.custom-cards svg {fill: white; height: 20%; width: 20%; position: absolute; left: 50%; top: 80%; transform: translate(-50%, -50%);}
+.custom-cards svg {height: 20%; width: 20%; position: absolute; left: 50%; top: 80%; transform: translate(-50%, -50%);}
 #custom-themes-button {position: absolute; padding-bottom: 10px; height: 100px; width: 100px; top: 71%; left: 29%; transform: translate(-50%, -50%); text-align: center;}
-.custom-themes svg {fill: white; height: 20%; width: 20%; position: absolute; left: 50%; top: 80%; transform: translate(-50%, -50%);}
+.custom-themes svg {height: 20%; width: 20%; position: absolute; left: 50%; top: 80%; transform: translate(-50%, -50%);}
 #custom-fonts-button {position: absolute; padding-bottom: 10px; height: 100px; width: 100px; top: 71%; left: 71%; transform: translate(-50%, -50%); text-align: center;}
 .custom-fonts svg {height: 20%; width: 20%; position: absolute; left: 50%; top: 80%; transform: translate(-50%, -50%);}
 #preset-themes-button {position: absolute; padding-bottom: 10px; height: 100px; width: 100px; top: 44%; left: 29%; transform: translate(-50%, -50%); text-align: center;}
-.preset-themes svg {fill: white; height: 20%; width: 20%; position: absolute; left: 50%; top: 80%; transform: translate(-50%, -50%);}
+.preset-themes svg {height: 20%; width: 20%; position: absolute; left: 50%; top: 80%; transform: translate(-50%, -50%);}
 #report-issue-button {position: absolute; height: 45px; width: 45%; top: 92%; left: 50%; padding-left: 35px; transform: translate(-50%, -50%); text-align: center;}
 #report-issue-button svg {position: absolute; left: 10px; top: 50%; transform: translateY(-50%);}
 
@@ -180,6 +222,64 @@ option {
 /* Custom Themes Page */
 #custom-theme-options {display: none; flex-direction: column; align-items: center; text-align: center; color: white;}
 #custom-theme-header {position: relative; bottom: 20px; font-size: 22px; text-align: left;}
+
+/* Checkbox */
+/* Sidebar course option container */
+.sidebar-course-option {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+/* Custom checkbox layout */
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  user-select: none;
+}
+
+/* Hide default checkbox */
+.custom-checkbox input {
+  display: none;
+}
+
+/* Custom checkbox box */
+.checkbox-box {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  background: var(--inputbg);
+  border: 1px solid rgba(255,255,255,0.15);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+/* Checkmark */
+.checkbox-box::after {
+  /* content: '✔'; */
+  content: "\2714";
+  font-size: 13px;
+  color: white;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all 0.15s ease;
+}
+
+/* Checked state */
+.custom-checkbox input:checked + .checkbox-box {
+  background: #00de3b;
+  border-color: #00de3b;
+}
+
+.custom-checkbox input:checked + .checkbox-box::after {
+  opacity: 1;
+  transform: scale(1);
+}
 
 /* Color Picker */
 .palette-selection {
@@ -432,6 +532,13 @@ option {
 }
 
 #return-to-menu-options {
+  border-radius: 14px;
+  color: white;
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
   margin-top: 10px;
 }
 

@@ -11,7 +11,7 @@ An Updated Look and Feel to Blackboard Learn. Providing Full User Customization,
 
 ### Supported on
 
-![Google Chrome](https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white)
+<p><a rel="noreferrer noopener" href="https://chromewebstore.google.com/detail/better-blackboard-learn/ngmpmjpigceaccddpkoeejmakahopopa"><img alt="Chrome Web Store" src="https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white"></a></p>
 
 ## Inquiries
 
@@ -19,9 +19,10 @@ To contact me, please email parkerwilliams1500@gmail.com, or you can open an iss
 
 ## Features
 - Dark Mode
-- Course Image & Name Customization
+- Custom Course Images  
+- Custom Course Names  
 - Preset Themes
-- User Customizable Themes
+- Full Theme Customization (Primary, Secondary, and Sidebar colors)
 - Custom Fonts
 
 ## Installation
@@ -43,23 +44,30 @@ To install, run, and build with this repository,
 
 ```
 .
-��� README.md
-��� content
-� ��� content.js
-��� icons
-� ��� BbOrangeGradient128.png
-� ��� BbOrangeGradient48.png
-� ��� BbOrangeGradient16.png
-��� options
-� ��� background.js
-� ��� options.html
-� ��� options.css
-��� popup
-� ��� popup.html
-� ��� popup.css
-� ��� popup.js
-��� manifest.json
+├── README.md
+├── content
+│   └── content.js
+├── icons
+│   ├── BbOrangeGradient128.png
+│   ├── BbOrangeGradient48.png
+│   └── BbOrangeGradient16.png
+├── options
+│   ├── background.js
+│   ├── options.html
+│   └── options.css
+├── popup
+│   ├── popup.html
+│   ├── popup.css
+│   └── popup.js
+└── manifest.json
 ```
+
+## Contributing
+If you find a bug or have a feature request, feel free to open an issue.
+Pull requests are welcome.
+
+## Contact
+Email: parkerwilliams1500@gmail.com
 
 ## Branding
 

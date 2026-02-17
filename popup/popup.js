@@ -6,6 +6,7 @@ var presetthemeoptions = document.getElementById('preset-theme-options');
 var fontoptions = document.getElementById('font-options');
 var reportissueoptions = document.getElementById('report-issue-options');
 var colorscheme = 'default';
+var courseCardsMatchSidebar;
 
 var courseImageMap = new Map();
 var courseNameMap = new Map();
@@ -138,26 +139,37 @@ document.getElementById('reset-banner-options').onclick = function() {
 }
 
 /* Dark Theme Toggle */
-chrome.storage.sync.get('colorscheme', function(data) {
-  const colorscheme = data.colorscheme || 'default';
-  if (colorscheme === 'dark') {
-      document.getElementById('dark-theme-button').style.backgroundColor = '#4CAF50';
-  } else {
-      document.getElementById('dark-theme-button').style.backgroundColor = '#474646';
-  }
+document.addEventListener('DOMContentLoaded', function() {
+    const darkButton = document.getElementById('dark-theme-button');
+
+    // Safety check
+    if (!darkButton) return;
+
+    // Set initial state from storage
+    chrome.storage.sync.get('colorscheme', function(data) {
+        const colorscheme = data.colorscheme || 'default';
+        if (colorscheme === 'dark') {
+            darkButton.classList.add('active');
+        } else {
+            darkButton.classList.remove('active');
+        }
+    });
+
+    // Toggle dark mode on click
+    darkButton.onclick = function() {
+        chrome.storage.sync.get('colorscheme', function(data) {
+            let colorscheme = data.colorscheme || 'default';
+
+            if (colorscheme === 'default') {
+                chrome.storage.sync.set({ 'colorscheme': 'dark' });
+                darkButton.classList.add('active');
+            } else {
+                chrome.storage.sync.set({ 'colorscheme': 'default' });
+                darkButton.classList.remove('active');
+            }
+        });
+    };
 });
-document.getElementById('dark-theme-button').onclick = function() {
-  chrome.storage.sync.get('colorscheme', function(data) {
-      let colorscheme = data.colorscheme || 'default';
-      if (colorscheme === 'default') {
-          chrome.storage.sync.set({'colorscheme': 'dark'});
-          document.getElementById('dark-theme-button').style.backgroundColor = '#4CAF50';
-      } else if (colorscheme === 'dark') {
-          chrome.storage.sync.set({'colorscheme': 'default'});
-          document.getElementById('dark-theme-button').style.backgroundColor = '#474646';
-      }
-  });
-};
 
 /* Preset Custom Themes */
 const presetThemes = [
@@ -206,7 +218,7 @@ document.getElementById('save-preset-theme-button').onclick = function() {
   presetthemeoptions.style.display = 'none';
 }
 
-/* Color Pickers */
+/* Color Pickers + Checkbox */
 var primarycolorPicker = document.getElementById('primary-color-input');
 var primaryText = document.getElementById('primary-color-text');
 primarycolorPicker.addEventListener('input', function() {
@@ -233,6 +245,14 @@ sidebarcolorPicker.addEventListener('input', function() {
 sidebarText.addEventListener('input', function() {
   sidebarcolorPicker.value = sidebarText.value;
 });
+chrome.storage.sync.get('matchSidebarToCourseCards', function(result) {
+  courseCardsMatchSidebar = result.matchSidebarToCourseCards || false;
+  document.getElementById('match-sidebar-to-courses').checked = courseCardsMatchSidebar;
+});
+document.getElementById('match-sidebar-to-courses').onclick = function() {
+  courseCardsMatchSidebar = !courseCardsMatchSidebar;
+  chrome.storage.sync.set({'matchSidebarToCourseCards': document.getElementById('match-sidebar-to-courses').checked});
+}
 
 /* User-Made Custom Theme */
 document.getElementById('primary-color-button').onclick = function() {
