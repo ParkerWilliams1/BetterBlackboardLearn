@@ -9,6 +9,8 @@
 
 An Updated Look and Feel to Blackboard Learn. Providing Full User Customization, including Dark Mode, Course Customization, &  More!
 
+![Better Blackboard Learn Dashboard](assets/BlackboardDashboard.png)
+
 ### Supported on
 
 <p><a rel="noreferrer noopener" href="https://chromewebstore.google.com/detail/better-blackboard-learn/ngmpmjpigceaccddpkoeejmakahopopa"><img alt="Chrome Web Store" src="https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white"></a></p>
